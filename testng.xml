@@ -4,7 +4,7 @@
 <suite name="Test Suite">
     <test name="Test Demo">
         <classes>
-            <class name="com.automation.tests.AppTest"/>
+            <class name="testcases.com.opencart.automation.TC001LoginSuccessTest"/>
         </classes>
 
     </test>
