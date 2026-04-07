@@ -1,4 +1,4 @@
-package com.automation.pages;
+package com.opencart.automation.pages;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

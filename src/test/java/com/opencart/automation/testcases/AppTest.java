@@ -1,9 +1,9 @@
-package com.automation.tests;
+package com.opencart.automation.testcases;
 
 //import junit.framework.Test;
 //import junit.framework.TestCase;
 //import junit.framework.TestSuite;
-import com.automation.utilities.ConfigReader;
+import com.opencart.automation.utilities.ConfigReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
