@@ -17,23 +17,36 @@ public class BaseTest {
     @BeforeClass
     public void setup() {
         logger = LogManager.getLogger(this.getClass());
+        //------------------------------------------------
         //Khởi tạo driver
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+//        WebDriverManager.chromedriver().setup();
+//        driver = new ChromeDriver();
+//
+//        driver.manage().deleteAllCookies();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//
+//        //Mở Url từ ConfigReader
+//        driver.get(ConfigReader.getUrl());	//reading url from properties file
+//        driver.manage().window().maximize();
+        //------------------------------------------------
+        driver = DriverFactory.getDriver();
+        driver.get(ConfigReader.getUrl());
 
-        driver.manage().deleteAllCookies();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        //Mở Url từ ConfigReader
-        driver.get(ConfigReader.getUrl());	//reading url from properties file
-        driver.manage().window().maximize();
-        logger.info("=== Test started on URL: " + ConfigReader.getUrl() + " ===");
+        logger.info("======================================================");
+        logger.info("TEST STARTED");
+        logger.info("Browser: {}", ConfigReader.getBrowser());
+        logger.info("URL: {}", ConfigReader.getUrl());
+        logger.info("======================================================");
     }
 
     @AfterClass
     public void tearDown() {
-        logger.info("=== Test completed. Closing browser ===");
-        driver.quit();
-        driver = null;
+        logger.info("=== TEST COMPLETED. Closing browser ===");
+//        driver.quit();
+        if (driver != null) {
+            DriverFactory.quitDriver();
+            driver = null;
+        }
+
     }
 }

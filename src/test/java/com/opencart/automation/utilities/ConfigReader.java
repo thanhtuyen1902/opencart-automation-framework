@@ -22,10 +22,11 @@ public class ConfigReader {
     }
     public static String getProperty(String key) {
         String value = p.getProperty(key);
-        if (value==null) {
+        if (value==null || value.trim().isEmpty()) {
             System.err.println("Warning: Property key" + key + "not found in config.properties");
+            return "";
         }
-        return value;
+        return value.trim();
     }
     //GET METHOD
     public static String getBrowser() {
