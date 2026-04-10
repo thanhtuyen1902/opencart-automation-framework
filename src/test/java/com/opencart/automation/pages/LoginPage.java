@@ -18,16 +18,20 @@ public class LoginPage extends BasePage{
     @FindBy(xpath="//input[@value='Login']") WebElement btnLogin;
 
     public void setEmailAddress(String email) {
-        txtEmail.clear();
-        txtEmail.sendKeys(email);
+        sendKeys(txtEmail, email);
     }
     public void setPassword(String password) {
-        txtPassword.clear();
-        txtPassword.sendKeys(password);
+        sendKeys(txtPassword, password);
     }
     public void clickLogin() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click()", btnLogin);
+        click(btnLogin);
+    }
+
+    //Thực hiện cả luồng login
+    public void login(String email, String password) {
+        setEmailAddress(email);
+        setPassword(password);
+        clickLogin();
     }
 
 

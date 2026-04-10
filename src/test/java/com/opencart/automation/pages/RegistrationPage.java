@@ -1,5 +1,6 @@
 package com.opencart.automation.pages;
 
+import com.opencart.automation.models.User;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,7 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath="//input[@id='input-firstname']") WebElement txtFirstName;
     @FindBy(xpath="//input[@id='input-lastname']") WebElement txtLastName;
     @FindBy(xpath="//input[@id='input-email']") WebElement txtEmail;
-    @FindBy(xpath="//input[@id='input-telephone']") WebElement txtPhoneNumber;
+    @FindBy(xpath="//input[@id='input-telephone']") WebElement txtTelephone;
     @FindBy(xpath="//input[@id='input-password']") WebElement txtPassword;
     @FindBy(xpath="//input[@id='input-confirm']") WebElement txtConfirmPassword;
     @FindBy(xpath="//input[@value='0']") WebElement rdoNewsletterNo;
@@ -22,47 +23,71 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath="//b[normalize-space()='Privacy Policy']") WebElement lnkPrivacyPolicy;
     @FindBy(xpath="//input[@value='Continue']") WebElement btnContinue;
 
+
+
+
     public void setFirstName(String firstName){
-        txtFirstName.clear();
-        txtFirstName.sendKeys(firstName);
+        sendKeys(txtFirstName, firstName);
     }
     public void setLastName(String lastName){
-        txtLastName.clear();
-        txtLastName.sendKeys(lastName);
+        sendKeys(txtLastName, lastName);
     }
     public void setEmail(String email){
-        txtEmail.clear();
-        txtEmail.sendKeys(email);
+        sendKeys(txtEmail, email);
+    }
+    public void setPhoneNumber(String phone){
+        sendKeys(txtTelephone, phone);
     }
     public void setPassword(String password){
-        txtPassword.clear();
-        txtPassword.sendKeys(password);
+        sendKeys(txtPassword, password);
     }
     public void setConfirmPassword(String confirmPwd){
-        txtConfirmPassword.clear();
-        txtConfirmPassword.sendKeys(confirmPwd);
+        sendKeys(txtConfirmPassword, confirmPwd);
     }
     public void setNewsletterNo(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click()", rdoNewsletterNo);
+        click(rdoNewsletterNo);
     }
     public void setNewsletterYes(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click()", rdoNewsletterYes);
+        click(rdoNewsletterYes);
     }
-    public void setAggreePolicy(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click()", chkAgreePolicy);
+    public void setAgreePolicy(){
+        click(chkAgreePolicy);
     }
     public void clickLinkPolicy(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click()", lnkPrivacyPolicy);
+        click(lnkPrivacyPolicy);
     }
 
     public void clickContinue(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click()", btnContinue);
+        click(btnContinue);
     }
+
+//    public void registerNewUser(String firstName, String lastName, String email, String phone, String pwd, String confPwd) {
+//        setFirstName(firstName);
+//        setLastName(lastName);
+//        setEmail(email);
+//        setPhoneNumber(phone);
+//        setPassword(pwd);
+//        setConfirmPassword(confPwd);
+////        setNewsletterNo();      //mặc định
+//        setAgreePolicy();
+//        clickContinue();
+//
+//    }
+    public void fillRegisterForm(User user) {
+        setFirstName(user.getFirstName());
+        setLastName(user.getLastName());
+        setEmail(user.getEmail());
+        setPhoneNumber(user.getTelephone());
+        setPassword(user.getPassword());
+        setConfirmPassword(user.getConfirmPassword());
+    //        setNewsletterNo();      //mặc định
+
+    }
+//    public void submitRegister() {
+//        clickContinue();
+//    }
+
+    //Verification method
 
 
 

@@ -17,15 +17,12 @@ public class HomePage extends BasePage{
     @FindBy(xpath="//button[@class='btn btn-default btn-lg']") WebElement btnSearch;
 
     public void clickMyAccount() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click()", ddlMyAccount);
+        click(ddlMyAccount);
     }
     public void clickRegisterPage() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click()", lnkRegisterPage);
+        click(lnkRegisterPage);
     }
     public void clickLoginPage() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click()", lnkLoginPage);
+        click(lnkLoginPage);
     }
 }
