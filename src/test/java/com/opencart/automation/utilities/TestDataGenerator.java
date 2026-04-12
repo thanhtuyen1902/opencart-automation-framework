@@ -8,9 +8,6 @@ import java.util.Random;
 public class TestDataGenerator {
     private static final Faker faker = new Faker();
 
-//    public static String generateName() {
-//        return "";
-//    }
 //
 //    public static String generateRandomEmail() {
 //        return "testuser" + System.currentTimeMillis() + "@gmail.com";
