@@ -5,7 +5,9 @@
     <test name="Test Demo">
         <classes>
 <!--            <class name="com.opencart.automation.testcases.TC002_LoginSuccessTest"/>-->
-            <class name="com.opencart.automation.testcases.TC001_RegistrationSuccessTest"/>
+            <class name="com.opencart.automation.testcases.TC002_LoginDDT"/>
+<!--            <class name="com.opencart.automation.testcases.TC001_RegistrationSuccessTest"/>-->
+<!--            <class name="com.opencart.automation.testcases.TC001_RegisterDDT"/>-->
         </classes>
 
     </test>

@@ -39,6 +39,15 @@ public class BasePage {
         element.clear();
         element.sendKeys(text);
     }
+    public String getErrorMessage(WebElement element) {
+        try {
+            waitForElementVisible(element);
+            return element.getText().trim();
+        } catch (Exception e) {
+            return ""; // Không tìm thấy thông báo lỗi
+        }
+    }
+
     //Các method chung sử dụng wait
     protected void waitForElementVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
