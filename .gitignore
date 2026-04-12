@@ -50,4 +50,3 @@ build/
 
 # Secrets
 .env
-config.properties
