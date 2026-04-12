@@ -3,6 +3,7 @@ package com.opencart.automation.testcases;
 import com.opencart.automation.base.BaseTest;
 import com.opencart.automation.models.User;
 import com.opencart.automation.pages.HomePage;
+import com.opencart.automation.pages.MyAccountPage;
 import com.opencart.automation.pages.RegistrationPage;
 import com.opencart.automation.pages.SuccessRegisterPage;
 import com.opencart.automation.utilities.TestDataGenerator;
@@ -18,6 +19,7 @@ public class TC001_RegistrationSuccessTest extends BaseTest {
             HomePage hp = new HomePage(driver);
             RegistrationPage rp = new RegistrationPage(driver);
             SuccessRegisterPage success_rp = new SuccessRegisterPage(driver);
+            MyAccountPage acp = new MyAccountPage(driver);
             User user = TestDataGenerator.generateUserWithDefaultPwd();
             SoftAssert softAssert = new SoftAssert();
             logger.info("Click on My Account dropdown");
@@ -33,10 +35,10 @@ public class TC001_RegistrationSuccessTest extends BaseTest {
             logger.info("Validate expected msg");
             softAssert.assertTrue(success_rp.getSuccessTitle().contains("Your Account Has Been Created!"), "Success message is showed");
             softAssert.assertTrue(success_rp.isSuccessPageDisplayed(), "SuccessPage is displayed");
-//            logger.info("Validate redirection to MyAccountPage");
-//            success_rp.clickContinue();
-
-            logger.info("Register new user successfully!");
+            logger.info("Validate redirection to MyAccountPage");
+            success_rp.clickContinue();
+            softAssert.assertTrue(acp.isMyAccountPageExists(), "MyAccountPage is displayed!");
+//            logger.info("Register new user successfully!");
             logger.info("Registering user: {}", user);
         }catch (Exception e) {
             logger.error("Test failed");
