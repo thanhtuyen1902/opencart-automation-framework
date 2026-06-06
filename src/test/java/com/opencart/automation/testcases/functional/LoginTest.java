@@ -1,6 +1,6 @@
 package com.opencart.automation.testcases.functional;
 
-import com.opencart.automation.base.BaseTest;
+import com.opencart.automation.core.BaseTest;
 import com.opencart.automation.pages.HomePage;
 import com.opencart.automation.pages.LoginPage;
 import com.opencart.automation.pages.MyAccountPage;
@@ -25,11 +25,13 @@ public class LoginTest extends BaseTest {
             softAssert = new SoftAssert();
             logger.info("Click on My Account dropdown");
             hp.clickMyAccount();
+            System.out.println(driver.getCurrentUrl());
+            System.out.println(driver.getTitle());
             logger.info("Click on Login link to open LoginPage");
             hp.clickLoginPage();
             lp = new LoginPage(driver);
         }catch (Exception e) {
-            Assert.fail();
+            Assert.fail("Error: Failed to navigate to LoginPage: " + e.getMessage());
         }
     }
     @Test(description = "LG_01 - Đăng nhập thành công với tài khoản hợp lệ")
@@ -45,13 +47,7 @@ public class LoginTest extends BaseTest {
             lp.clickLogin();
             acp = new MyAccountPage(driver);
             logger.info("Step 4: Validating login success");
-            if (acp.isMyAccountPageExists()) {
-                Assert.assertTrue(true, "MyAccountPage should be displayed");
-            }else {
-                logger.error("Test failed");
-                logger.debug("Debug logs..");
-                Assert.fail();
-            }
+            Assert.assertTrue(acp.isMyAccountPageExists(), "MyAccountPage should be displayed");
             logger.info("TEST PASSED");
         }catch (Exception e) {
             logger.error("TEST FAILED: ", e);

@@ -141,15 +141,15 @@ public class RegistrationPage extends BasePage{
     public String getFieldError(String fieldName) {
         switch(fieldName.toLowerCase()) {
             case "firstname":
-                return firstNameErrMsg.getText();
+                return getErrorMessage(firstNameErrMsg);
             case "lastname":
-                return lastNameErrMsg.getText();
+                return getErrorMessage(lastNameErrMsg);
             case "email":
-                return emailErrMsg.getText();
+                return getErrorMessage(emailErrMsg);
             case "telephone":
-                return telephoneErrMsg.getText();
+                return getErrorMessage(telephoneErrMsg);
             case "password":
-                return pwdErrMsg.getText();
+                return getErrorMessage(pwdErrMsg);
             default:
                 throw new IllegalArgumentException("Invalid field name: " + fieldName);
         }

@@ -14,7 +14,8 @@ public class LoginPage extends BasePage{
     @FindBy(xpath="//input[@id='input-password']") WebElement txtPassword;
     @FindBy(xpath="//div[@class='form-group']//a[normalize-space()='Forgotten Password']") WebElement lnkForgotPwd;
 //    @FindBy(xpath="//input[@value='Login']") WebElement btnLogin;
-    private By btnLogin = By.cssSelector("input.btn.btn-primary");
+    @FindBy(css = "input.btn.btn-primary") WebElement btnLogin;
+//    private By btnLogin = By.cssSelector("input.btn.btn-primary");
     //Error message
     @FindBy(css = ".alert.alert-danger") WebElement warningMessage;
 
@@ -26,8 +27,8 @@ public class LoginPage extends BasePage{
         sendKeys(txtPassword, password);
     }
     public void clickLogin() {
-//        click(btnLogin);
-        click(driver.findElement(btnLogin));
+        click(btnLogin);
+//        click(driver.findElement(btnLogin));
     }
 
     public boolean isLoginFailedMessageDisplayed(String expectedMsg) {

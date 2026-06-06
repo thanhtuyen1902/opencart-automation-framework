@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Test Suite">
+    <parameter name="browser" value="chrome"/>
+    <listeners>
+        <listener class-name="com.opencart.automation.utilities.ExtentReportListener" />
+    </listeners>
+
+    <test name="Test Demo">
+        <classes>
+            <!--            Login func-->
+            <class name="com.opencart.automation.testcases.functional.LoginTest">
+                <methods>
+                    <include name="testLoginSuccess"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+</suite>

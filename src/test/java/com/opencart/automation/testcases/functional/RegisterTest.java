@@ -1,6 +1,6 @@
 package com.opencart.automation.testcases.functional;
 
-import com.opencart.automation.base.BaseTest;
+import com.opencart.automation.core.BaseTest;
 import com.opencart.automation.models.User;
 import com.opencart.automation.pages.HomePage;
 import com.opencart.automation.pages.MyAccountPage;

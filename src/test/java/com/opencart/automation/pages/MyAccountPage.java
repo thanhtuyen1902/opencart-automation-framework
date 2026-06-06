@@ -21,7 +21,6 @@ public class MyAccountPage extends BasePage{
         }
 
     }
-
     public void clickLogout() {
         click(lnkLogout);
     }

@@ -1,12 +1,12 @@
 package com.opencart.automation.testcases.e2e;
 
-import com.opencart.automation.base.BaseE2ETest;
+import com.opencart.automation.core.BaseE2ETest;
 import com.opencart.automation.models.User;
 import com.opencart.automation.pages.*;
 import com.opencart.automation.utilities.TestDataGenerator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+@Test(groups = {"E2ETest"})
 public class E2ERegisterFlowTest extends BaseE2ETest {
     @Test(description = "E2E_01")
     public void testE2ERegisterFlow() {
