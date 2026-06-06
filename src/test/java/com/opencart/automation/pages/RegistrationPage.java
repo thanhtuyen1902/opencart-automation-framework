@@ -1,7 +1,6 @@
 package com.opencart.automation.pages;
 
 import com.opencart.automation.models.User;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +10,7 @@ public class RegistrationPage extends BasePage{
         super(driver);
     }
 
+    // locator elements
     @FindBy(xpath="//input[@id='input-firstname']") WebElement txtFirstName;
     @FindBy(xpath="//input[@id='input-lastname']") WebElement txtLastName;
     @FindBy(xpath="//input[@id='input-email']") WebElement txtEmail;
@@ -21,19 +21,19 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath="//label[normalize-space()='Yes']") WebElement rdoNewsletterYes;
     @FindBy(xpath="//input[@name='agree']") WebElement chkAgreePolicy;
     @FindBy(xpath="//b[normalize-space()='Privacy Policy']") WebElement lnkPrivacyPolicy;
-    @FindBy(xpath="//input[@value='Continue']") WebElement btnContinue;
+    @FindBy(css = "input.btn.btn-primary") WebElement btnContinue;
 
     //Error message
+    @FindBy(css = "#input-firstname + .text-danger") WebElement firstNameErrMsg;
+    @FindBy(css = "#input-lastname + .text-danger") WebElement lastNameErrMsg;
+    @FindBy(css = "#input-email + .text-danger") WebElement emailErrMsg;
+    @FindBy(css = "#input-telephone + .text-danger") WebElement telephoneErrMsg;
+    @FindBy(css = "#input-password + .text-danger") WebElement pwdErrMsg;
+    @FindBy(css = "#input-confirm + .text-danger") WebElement confirmPwdMsg;
+    @FindBy(css = ".alert.alert-danger") WebElement warningMessage;
 
-    @FindBy(xpath="//div[contains(text(),'First Name must be between 1 and 32 characters!')]") WebElement firtNameErrMsg;
-    @FindBy(xpath="//div[contains(text(),'Last Name must be between 1 and 32 characters!')]") WebElement lastNameErrMsg;
-    @FindBy(xpath="//div[contains(text(),'E-Mail Address does not appear to be valid!')]") WebElement emailErrMsg;
-    @FindBy(xpath="//div[contains(text(),'Telephone must be between 3 and 32 characters!')]") WebElement telephoneErrMsg;
-    @FindBy(xpath="//div[contains(text(),'Password must be between 4 and 20 characters!')]") WebElement pwdErrMsg;
-    @FindBy(xpath="//div[contains(text(),'Password confirmation does not match password!')]") WebElement confirmPwdMsg;
-    @FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']") WebElement agreeTermsWarnMsg;
 
-
+    //Action methods
     public void setFirstName(String firstName){
         sendKeys(txtFirstName, firstName);
     }
@@ -64,47 +64,48 @@ public class RegistrationPage extends BasePage{
     public void clickLinkPolicy(){
         click(lnkPrivacyPolicy);
     }
+    public void setNewsletter(String subscribeNewsletter) {
+        if(subscribeNewsletter.equalsIgnoreCase("yes")){
+            setNewsletterYes();
+        }else {
+            setNewsletterNo();  //mặc định
+        }
+    }
 
     public void clickContinue(){
         click(btnContinue);
     }
 
-    //
-//    public String getConfirmationMsg() {
-//        try {
-//            return getErrorMessage(firtNameErrMsg);
-//        }catch(Exception e) {
-//            return (e.getMessage());
-//        }
-//
-//    }
-    //
+
     //dùng DDT
-    public void registerNewUser(String firstName,
-                                String lastName,
-                                String email,
-                                String telephone,
-                                String pwd,
-                                String confPwd,
-                                String subscribeNewsletter,
-                                String agreeTerms) {
+    public void registerDDT(String firstName,
+                            String lastName,
+                            String email,
+                            String telephone,
+                            String pwd,
+                            String confPwd,
+                            String subscribeNewsletter,
+                            String agreeTerms) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         setPhoneNumber(telephone);
         setPassword(pwd);
         setConfirmPassword(confPwd);
-        if (subscribeNewsletter.equalsIgnoreCase("yes")){
-            setNewsletterYes();
-        }else {
-            setNewsletterNo();  //mặc định
-        }
-        if (agreeTerms.equalsIgnoreCase("yes")){
+        setNewsletter(subscribeNewsletter);
+        if (agreeTerms.equalsIgnoreCase("true")){
             setAgreePolicy();
         }
 
         clickContinue();
 
+    }
+    public SuccessRegisterPage register(User user) {
+        fillRegisterForm(user);
+        setNewsletterYes();
+        setAgreePolicy();
+        clickContinue();
+        return new SuccessRegisterPage(driver);
     }
     //dùng fake data
     public void fillRegisterForm(User user) {
@@ -118,47 +119,41 @@ public class RegistrationPage extends BasePage{
 
     }
 
-
     //Verification method
 //    public boolean isRegistrationPageStillDisplayed() {
 //        return isElementDisplayed(txtFirstName);
 //    }
-    //Method chung kiểm tra lỗi
-    private boolean isErrorMessageDisplayed(WebElement errorElement, String expectedMsg) {
-        try {
-            String actualMsg = getErrorMessage(errorElement);
-            return actualMsg.contains(expectedMsg) || actualMsg.equalsIgnoreCase(expectedMsg);
-        }catch (Exception e) {
-            return false;
-        }
-    }
+
 
     //Validation method
-    public boolean isFirstNameErrorMsgDisplayed(String expectedMsg) {
-        return isErrorMessageDisplayed(firtNameErrMsg, expectedMsg);
-    }
-
-    public boolean isLastNameErrorMsgDisplayed(String expectedMsg) {
-        return isErrorMessageDisplayed(lastNameErrMsg, expectedMsg);
-    }
-
-    public boolean isEmailErrorMsgDisplayed(String expectedMsg) {
-        return isErrorMessageDisplayed(emailErrMsg, expectedMsg);
-    }
-    public boolean isTelephoneErrorMsgDisplayed(String expectedMsg) {
-        return isErrorMessageDisplayed(telephoneErrMsg, expectedMsg);
-    }
-
-    public boolean isPasswordErrorMsgDisplayed(String expectedMsg) {
-        return isErrorMessageDisplayed(pwdErrMsg, expectedMsg);
+    public boolean isEmailErrorDuplicateDisplayed(String expectedMsg) {
+        return isMessageDisplayed(warningMessage, expectedMsg);
     }
 
     public boolean isConfPwdErrorMsgDisplayed(String expectedMsg) {
-        return isErrorMessageDisplayed(confirmPwdMsg, expectedMsg);
+        return isMessageDisplayed(confirmPwdMsg, expectedMsg);
     }
 
     public boolean isPolicyErrorMsgDisplayed(String expectedMsg) {
-        return isErrorMessageDisplayed(agreeTermsWarnMsg, expectedMsg);
+        return isMessageDisplayed(warningMessage, expectedMsg);
+    }
+    //DDT
+    public String getFieldError(String fieldName) {
+        switch(fieldName.toLowerCase()) {
+            case "firstname":
+                return firstNameErrMsg.getText();
+            case "lastname":
+                return lastNameErrMsg.getText();
+            case "email":
+                return emailErrMsg.getText();
+            case "telephone":
+                return telephoneErrMsg.getText();
+            case "password":
+                return pwdErrMsg.getText();
+            default:
+                throw new IllegalArgumentException("Invalid field name: " + fieldName);
+        }
+
     }
 
 }

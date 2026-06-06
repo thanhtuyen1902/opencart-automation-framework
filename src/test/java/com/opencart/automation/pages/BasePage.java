@@ -1,25 +1,33 @@
 package com.opencart.automation.pages;
 
+import com.opencart.automation.pages.components.ProductItem;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
+    // msg success add to cart
+    @FindBy(xpath="//div[@class='alert alert-success alert-dismissible']") WebElement msgAddToCartSuccess;
+    // Product items in search results
+    private final By productThumbs = By.cssSelector(".product-thumb");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
         //tự động khởi tạo WebElement được đánh dấu @FindBy trong class hiện tại
         PageFactory.initElements(driver, this);
         //Khởi tạo Wait
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
     }
     //Các method chung có thể dùng lại ở mọi page
@@ -39,12 +47,21 @@ public class BasePage {
         element.clear();
         element.sendKeys(text);
     }
-    public String getErrorMessage(WebElement element) {
+    protected String getErrorMessage(WebElement element) {
         try {
             waitForElementVisible(element);
             return element.getText().trim();
         } catch (Exception e) {
             return ""; // Không tìm thấy thông báo lỗi
+        }
+    }
+
+    protected boolean isMessageDisplayed(WebElement element, String expectedMsg) {
+        try {
+            String actualMsg = getErrorMessage(element);
+            return actualMsg.contains(expectedMsg) || actualMsg.equalsIgnoreCase(expectedMsg);
+        }catch (Exception e) {
+            return false;
         }
     }
 
@@ -59,4 +76,30 @@ public class BasePage {
         wait.until(ExpectedConditions.textToBePresentInElement(element, text));
     }
 
+    public boolean isSuccessAddToCartMessageDisplayed(String expectedMsg) {
+        return isMessageDisplayed(msgAddToCartSuccess, expectedMsg);
+    }
+
+    // Work with product items in search results
+
+    /**
+     * Lấy tất cả products trên page
+     * biến toàn bộ HTML product thành 1 list WebElement để dễ thao tác
+     */
+
+    public List<ProductItem> getProductItems() {
+        return driver.findElements(productThumbs)
+                .stream()
+                .map(element -> new ProductItem(driver, element))
+                .collect(Collectors.toList());
+    }
+
+    // Tìm đúng product object theo tên
+    public ProductItem findProductByName(String productName) {
+        return getProductItems()
+                .stream()
+                .filter(item -> item.getProductName().equalsIgnoreCase(productName))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy product nào có tên: " + productName));
+    }
 }

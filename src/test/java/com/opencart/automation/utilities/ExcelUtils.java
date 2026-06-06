@@ -1,15 +1,13 @@
 package com.opencart.automation.utilities;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class ExcelUtility {
-    public static Object[][] getTestData(String filePath, String sheetName) throws IOException {
+public class ExcelUtils {
+    public static Object[][] getExcelData(String filePath, String sheetName) throws IOException {
 
         Object[][] data = null;
         try (FileInputStream fis = new FileInputStream(filePath);

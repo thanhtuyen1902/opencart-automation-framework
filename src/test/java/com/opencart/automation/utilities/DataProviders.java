@@ -11,7 +11,7 @@ public class DataProviders {
         String path = "src/test/resources/testData/registration_negative_testdata.xlsx";
         String sheetName = "NegativeRegistration";
         try {
-            return ExcelUtility.getTestData(path, sheetName);
+            return ExcelUtils.getExcelData(path, sheetName);
         } catch (IOException e) {
             throw new RuntimeException("Lỗi đọc file", e);
         }
@@ -23,7 +23,7 @@ public class DataProviders {
         String path = "src/test/resources/testData/login_testdata.xlsx";
         String sheetName = "LoginData";
         try {
-            return ExcelUtility.getTestData(path, sheetName);
+            return ExcelUtils.getExcelData(path, sheetName);
         } catch (IOException e) {
             throw new RuntimeException("Lỗi đọc file", e);
         }

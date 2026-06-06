@@ -32,15 +32,26 @@ public class ConfigReader {
     public static String getBrowser() {
         return getProperty("browser");
     }
+    //Application URL
     public static String getUrl(){
-        return getProperty("url");
+        return getProperty("base_url");
     }
-    public static String getUsername() {
-        return getProperty("username");
+    // Login credentials
+    public static String getEmail() {
+        return getProperty("email");
     }
     public static String getPassword() {
         return getProperty("password");
     }
+    // Implicit Wait timeout
 
+    //Hạ tầng chạy test (local/remote)
+    public static String getExecutionMode() {
+        return getProperty("execution_env").toLowerCase().trim();
+    }
+
+    public static String getGridURL() {
+        return getProperty("grid_url");
+    }
 
 }
