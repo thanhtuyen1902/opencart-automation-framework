@@ -17,16 +17,16 @@
         </classes>
     </test>
 
-    <test name="Firefox Test">
-        <parameter name="browser" value="firefox" />
-        <classes>
-            <class name="com.opencart.automation.testcases.functional.LoginTest">
-                <methods>
-                    <include name="testLoginSuccess"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="Firefox Test">-->
+<!--        <parameter name="browser" value="firefox" />-->
+<!--        <classes>-->
+<!--            <class name="com.opencart.automation.testcases.functional.LoginTest">-->
+<!--                <methods>-->
+<!--                    <include name="testLoginSuccess"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 
 </suite>

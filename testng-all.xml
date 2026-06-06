@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Test Suite">
+    <parameter name="browser" value="chrome"/>
+    <listeners>
+        <listener class-name="com.opencart.automation.utilities.ExtentReportListener" />
+    </listeners>
+
+    <test name="Test All Suite">
+
+        <classes>
+<!--                Register func-->
+            <class name="com.opencart.automation.testcases.functional.RegisterTest">
+                <methods>
+                    <include name="testRegisterSuccess"/>
+                    <include name="testRegisterEmptyFields"/>
+                    <include name="testRegisterNoPrivacyPolicy"/>
+                    <include name="testRegisterDuplicateEmail"/>
+                    <include name="testRegisterPasswordMismatch"/>
+                </methods>
+            </class>
+<!--            Login func-->
+            <class name="com.opencart.automation.testcases.functional.LoginTest">
+                <methods>
+                    <include name="testLoginSuccess"/>
+                    <include name="testLoginFailedWithWrongPassword"/>
+                    <include name="testLoginFailedWithInvalidEmail"/>
+                </methods>
+            </class>
+<!--            Search func-->
+            <class name="com.opencart.automation.testcases.functional.SearchTest">
+                <methods>
+                    <include name="testSearchExactKeyword"/>
+                    <include name="testSearchNoMatchingProduct"/>
+<!--                    cần xem lại case này-->
+                    <include name="testSearchCaseInsensitive"/>
+                </methods>
+            </class>
+<!--            Cart func-->
+            <class name="com.opencart.automation.testcases.functional.AddToCartTest">
+                <methods>
+                    <include name="testAddToCartFromHomePage"/>
+                    <include name="testAddToCartDuplicate"/>
+                    <include name="testAddToCartFromProductPage"/>
+                </methods>
+            </class>
+
+<!--            E2E Test-->
+<!--            chưa ổn định lắm-->
+            <class name="com.opencart.automation.testcases.e2e.E2ERegisterFlowTest"/>
+            <class name="com.opencart.automation.testcases.e2e.E2ELoginFlowTest"/>
+
+        </classes>
+
+    </test>
+</suite>

@@ -1,0 +1,56 @@
+services:
+    # ======================
+    # SELENIUM GRID
+    # ======================
+  selenium-hub:
+    image: selenium/hub:4.20.0
+    container_name: selenium-hub
+    ports:
+      - "4442-4444:4442-4444"
+    networks:
+      - grid
+    extra_hosts:
+      - "opencart_demo.test:host-gateway"
+  node-chrome:
+    image: selenium/node-chrome:4.20.0
+    container_name: node-chrome
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - grid
+    extra_hosts:
+      - "opencart_demo.test:host-gateway"
+  node-firefox:
+    image: selenium/node-firefox:4.20.0
+    container_name: node-firefox
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - grid
+    extra_hosts:
+      - "opencart_demo.test:host-gateway"
+  node-edge:
+    image: selenium/node-edge:4.20.0
+    container_name: node-edge
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - grid
+    extra_hosts:
+      - "opencart_demo.test:host-gateway"
+
+networks:
+  grid:
+    driver: bridge

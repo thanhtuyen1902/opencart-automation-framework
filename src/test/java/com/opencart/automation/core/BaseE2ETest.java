@@ -1,4 +1,4 @@
-package com.opencart.automation.base;
+package com.opencart.automation.core;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

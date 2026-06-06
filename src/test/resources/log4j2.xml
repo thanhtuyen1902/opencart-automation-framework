@@ -8,11 +8,11 @@
 
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+            <PatternLayout charset="UTF-8" pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
 
         <RollingFile name="File" filename="${basePath}/automation.log" filePattern="${basePath}/automation-%d{yyyy-MM-dd}.log" >
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <PatternLayout charset="UTF-8" pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
             <Policies>
                 <SizeBasedTriggeringPolicy size="5KB"/>
             </Policies>
@@ -24,7 +24,7 @@
         <!-- All < Trace < Debug < Info < Warn < Error < Fatal < Off -->
         <Root level="debug">
             <AppenderRef ref="Console" />
-            <!-- <AppenderRef ref="File" /> -->
+             <AppenderRef ref="File" />
         </Root>
     </Loggers>
 

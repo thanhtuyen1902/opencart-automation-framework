@@ -1,6 +1,6 @@
 package com.opencart.automation.testcases.functional;
 
-import com.opencart.automation.base.BaseTest;
+import com.opencart.automation.core.BaseTest;
 import com.opencart.automation.pages.*;
 import com.opencart.automation.utilities.TestDataGenerator;
 import org.testng.Assert;
@@ -60,6 +60,7 @@ public class AddToCartTest extends BaseTest {
             softAssert.assertTrue(hp.isSuccessAddToCartMessageDisplayed(expectedMsg),
                     "Success message should be displayed with correct content");
             logger.info("Step 3: Verify product {} is added to cart successfully", productName);
+            Thread.sleep(100);
             logger.info("Step 3.1: Navigate to CartPage");
             hp.clickCartPage();
             cp = new CartPage(driver);

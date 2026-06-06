@@ -1,4 +1,4 @@
-package com.opencart.automation.base;
+package com.opencart.automation.core;
 
 import com.epam.healenium.SelfHealingDriver;
 import com.opencart.automation.utilities.ConfigReader;
@@ -15,6 +15,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Duration;
 
@@ -64,6 +66,22 @@ public class DriverFactory {
 
 
     }
+
+    //Trả về driver của thread hiện tại
+    public static WebDriver getDriver() {
+        //trả về driver cho nơi gọi (thường basetest)
+        return driver.get();
+    }
+
+    //Đóng driver và dọn dẹp threadlocal
+    public static void quitDriver(){
+        if (driver.get() != null) {
+            driver.get().quit();
+            driver.remove();
+        }
+
+    }
+
     //Tạo driver cho local execution
     private static WebDriver createLocalDriver(String browser) {
 
@@ -90,7 +108,13 @@ public class DriverFactory {
         try {
             switch(browser.toLowerCase()) {
                 case "chrome":
-                    return new RemoteWebDriver(new URL(gridURL), getChromeOptions());
+                    URL url = null;
+                    try {
+                        url = new URI(gridURL).toURL();
+                    } catch (URISyntaxException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return new RemoteWebDriver(url, getChromeOptions());
                 case "edge":
                     return new RemoteWebDriver(new URL(gridURL), getEdgeOptions());
                 case "firefox":
@@ -107,33 +131,19 @@ public class DriverFactory {
     private static ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
         // Thêm các tùy chọn nếu cần, ví dụ:
-        chromeOptions.addArguments("--headless"); // Chạy ở chế độ headless
+//        chromeOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return chromeOptions;
     }
     private static FirefoxOptions getFirefoxOptions() {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         // Thêm các tùy chọn nếu cần, ví dụ:
-        firefoxOptions.addArguments("--headless"); // Chạy ở chế độ headless
+//        firefoxOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return firefoxOptions;
     }
     private static EdgeOptions getEdgeOptions() {
         EdgeOptions edgeOptions = new EdgeOptions();
         // Thêm các tùy chọn nếu cần, ví dụ:
-        edgeOptions.addArguments("--headless"); // Chạy ở chế độ headless
+//        edgeOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return edgeOptions;
-    }
-    //Trả về driver của thread hiện tại
-    public static WebDriver getDriver() {
-        //trả về driver cho nơi gọi (thường basetest)
-        return driver.get();
-    }
-
-    //Đóng driver và dọn dẹp threadlocal
-    public static void quitDriver(){
-        if (driver.get() != null) {
-            driver.get().quit();
-            driver.remove();
-        }
-
     }
 }

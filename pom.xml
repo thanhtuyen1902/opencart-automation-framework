@@ -12,6 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <build>
@@ -22,7 +23,9 @@
               <version>3.5.5</version>
               <configuration>
                   <suiteXmlFiles>
-                      <suiteXmlFile>testng.xml</suiteXmlFile>
+<!--                      <suiteXmlFile>testng-all.xml</suiteXmlFile>-->
+                      <!--suppress UnresolvedMavenProperty -->
+                      <suiteXmlFile>${suiteFile}</suiteXmlFile>
                   </suiteXmlFiles>
                   <properties>
                       <property>
@@ -30,6 +33,7 @@
                           <value>false</value>
                       </property>
                   </properties>
+                  <argLine>-Dfile.encoding=UTF-8</argLine>
               </configuration>
               <dependencies>
                   <dependency>

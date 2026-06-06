@@ -5,7 +5,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.opencart.automation.base.BaseTest;
+import com.opencart.automation.core.BaseTest;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -40,7 +40,8 @@ public class ExtentReportListener implements ITestListener {
         // Environment info
         extent.setSystemInfo("Application", "OpenCart");
         extent.setSystemInfo("Environment", "QA");
-        extent.setSystemInfo("Tester", System.getProperty("user.name"));
+        extent.setSystemInfo("Browser", context.getCurrentXmlTest().getParameter("browser"));
+        extent.setSystemInfo("Tester", "TuyenMT");
 
     }
     //Activate when start running @Test
