@@ -15,8 +15,6 @@ pipeline {
                 bat 'mvn clean test -DsuiteFile=testng-test.xml'
             }
         }
-
-        
     }
 
     post {
