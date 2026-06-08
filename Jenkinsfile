@@ -16,9 +16,6 @@ pipeline {
             }
         }
     }
-
-
-
     post {
         success {
             echo 'BUILD SUCCESS'
