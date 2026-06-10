@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main',
+                git branch: 'develop',
                     url: 'https://github.com/thanhtuyen1902/opencart-automation-framework.git'
             }
         }
@@ -17,6 +17,7 @@ pipeline {
         }
     }
     post {
+
         success {
             echo 'BUILD SUCCESS'
         }
@@ -27,6 +28,17 @@ pipeline {
 
         always {
             echo 'Done'
+            junit allowEmptyResults: true,
+                  testResults: 'target/surefire-reports/*.xml'
+
+            publishHTML([
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'reports',
+                reportFiles: 'TestReport.html',
+                reportName: 'Extent Report'
+            ])
         }
     }
 }

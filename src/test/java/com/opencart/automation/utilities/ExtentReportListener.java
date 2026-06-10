@@ -25,8 +25,10 @@ public class ExtentReportListener implements ITestListener {
     //Activate when start running suite
     public void onStart(ITestContext context) {
 //        suiteStartTime = System.currentTimeMillis();
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-        reportName = "TestReport_" + timeStamp + ".html";
+//        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+//        reportName = "TestReport_" + timeStamp + ".html";
+//        sparkReporter = new ExtentSparkReporter(".\\reports\\" + reportName);
+        reportName = "TestReport.html";
         sparkReporter = new ExtentSparkReporter(".\\reports\\" + reportName);
         //Title of the report
         sparkReporter.config().setDocumentTitle("OpenCart Automation Test Report");
