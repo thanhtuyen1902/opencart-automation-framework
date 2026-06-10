@@ -12,7 +12,8 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                bat 'mvn clean test -DsuiteFile=testng-test.xml'
+//                 bat 'mvn clean test -DsuiteFile=testng-test.xml'
+                   bat 'mvn clean test -DsuiteFile=testng-smoke.xml'
             }
         }
     }
