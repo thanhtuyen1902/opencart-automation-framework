@@ -6,13 +6,13 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.opencart.automation.core.BaseTest;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
+import org.testng.*;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ExtentReportListener implements ITestListener {
     private ExtentSparkReporter sparkReporter;
@@ -21,15 +21,16 @@ public class ExtentReportListener implements ITestListener {
     // Use ThreadLocal to ensure memory parallel
     private ThreadLocal<ExtentTest> testLogger = new ThreadLocal<>();
     private String reportName;
+    private static boolean systemInfoAdded = false;
 //    private long suiteStartTime;
     //Activate when start running suite
     public void onStart(ITestContext context) {
 //        suiteStartTime = System.currentTimeMillis();
-//        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-//        reportName = "TestReport_" + timeStamp + ".html";
-//        sparkReporter = new ExtentSparkReporter(".\\reports\\" + reportName);
-        reportName = "TestReport.html";
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        reportName = "TestReport_" + timeStamp + ".html";
         sparkReporter = new ExtentSparkReporter(".\\reports\\" + reportName);
+//        reportName = "TestReport.html";
+//        sparkReporter = new ExtentSparkReporter(".\\reports\\" + reportName);
         //Title of the report
         sparkReporter.config().setDocumentTitle("OpenCart Automation Test Report");
         //Name of the report
@@ -42,7 +43,8 @@ public class ExtentReportListener implements ITestListener {
         // Environment info
         extent.setSystemInfo("Application", "OpenCart");
         extent.setSystemInfo("Environment", "QA");
-        extent.setSystemInfo("Browser", context.getCurrentXmlTest().getParameter("browser"));
+        extent.setSystemInfo("Execution Mode", ConfigReader.getExecutionMode());
+//        extent.setSystemInfo("Browser", context.getCurrentXmlTest().getParameter("browser"));
         extent.setSystemInfo("Tester", "TuyenMT");
 
     }
@@ -105,12 +107,21 @@ public class ExtentReportListener implements ITestListener {
         testLogger.get().log(Status.SKIP, "Cause of Skipping: " + result.getThrowable());
     }
     //Activate when finish suite
+    //ITestContext context
     public void onFinish(ITestContext context) {
 //        long suiteEndTime = System.currentTimeMillis();
         long suiteStartTime = context.getStartDate().getTime();
         long suiteEndTime = context.getEndDate().getTime();
         double totalSuiteDuration = (suiteEndTime - suiteStartTime)/1000.0;
-        extent.setSystemInfo("Total Suite Duration ", totalSuiteDuration + " seconds");
+        if (!systemInfoAdded) {
+            extent.setSystemInfo("Total Tests", String.valueOf(context.getAllTestMethods().length));
+//            extent.setSystemInfo("Passed Tests", String.valueOf(context.getPassedTests().size()));
+//            extent.setSystemInfo("Failed Tests", String.valueOf(context.getFailedTests().size()));
+//            extent.setSystemInfo("Skipped Tests", String.valueOf(context.getSkippedTests().size()));
+            extent.setSystemInfo("Total Suite Duration ", totalSuiteDuration + " seconds");
+            systemInfoAdded = true;
+        }
+
         if (extent !=null) {
             //Đẩy toàn bộ dữ liệu từ bộ nhớ đệm ra file HTML
             extent.flush();
