@@ -9,6 +9,11 @@ import com.opencart.automation.core.BaseTest;
 import org.testng.*;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
@@ -126,9 +131,16 @@ public class ExtentReportListener implements ITestListener {
             //Đẩy toàn bộ dữ liệu từ bộ nhớ đệm ra file HTML
             extent.flush();
         }
+        //copy report to a common report name
+        Path source = Paths.get(".\\reports\\" + reportName);
+        Path target = Paths.get(".\\reports\\TestReport.html");
+
+        try {
+            Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.err.println("Error copying report file: " + e.getMessage());
+        }
         //Options: auto open report on browser
-
-
     }
 
 }

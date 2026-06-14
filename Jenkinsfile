@@ -14,7 +14,7 @@ pipeline {
             steps {
 //                 bat 'mvn clean test -DsuiteFile=testng-test.xml'
                    bat 'mvn clean test -DsuiteFile=testng-smoke.xml'
-                   
+
             }
         }
     }
@@ -33,14 +33,14 @@ pipeline {
             junit allowEmptyResults: true,
                   testResults: 'target/surefire-reports/*.xml'
 
-//             publishHTML([
-//                 allowMissing: true,
-//                 alwaysLinkToLastBuild: true,
-//                 keepAll: true,
-//                 reportDir: 'reports',
-//                 reportFiles: 'TestReport.html',
-//                 reportName: 'Extent Report'
-//             ])
+            publishHTML([
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'reports',
+                reportFiles: 'TestReport.html',
+                reportName: 'Extent Report'
+            ])
         }
     }
 }
