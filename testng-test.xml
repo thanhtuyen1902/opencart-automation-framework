@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="Test Suite">
-    <parameter name="browser" value="edge"/>
+    <parameter name="browser" value="firefox"/>
     <listeners>
         <listener class-name="com.opencart.automation.utilities.ExtentReportListener" />
     </listeners>
@@ -10,9 +10,9 @@
     <test name="Test Demo">
         <classes>
             <!--            Login func-->
-            <class name="com.opencart.automation.testcases.functional.RegisterTest">
+            <class name="com.opencart.automation.testcases.functional.AddToCartTest">
                 <methods>
-                    <include name="testRegisterEmptyFields"/>
+                    <include name="testAddToCartDuplicate"/>
                 </methods>
             </class>
 <!--            <class name="com.opencart.automation.testcases.functional.AddToCartTest">-->

@@ -30,13 +30,17 @@ public class RegistrationPage extends BasePage{
 //    @FindBy(css = "#input-email + .text-danger") WebElement emailErrMsg;
 //    @FindBy(css = "#input-telephone + .text-danger") WebElement telephoneErrMsg;
 //    @FindBy(css = "#input-password + .text-danger") WebElement pwdErrMsg;
-    @FindBy(css = "#input-confirm + .text-danger") WebElement confirmPwdMsg;
-    @FindBy(css = ".alert.alert-danger") WebElement warningMessage;
+//    @FindBy(css = "#input-confirm + .text-danger") WebElement confirmPwdMsg;
+//    @FindBy(css = ".alert.alert-danger") WebElement warningMessage;
+
     private final By firstNameErrMsg = By.cssSelector("#input-firstname + .text-danger");
     private final By lastNameErrMsg = By.cssSelector("#input-lastname + .text-danger");
     private final By emailErrMsg = By.cssSelector("#input-email + .text-danger");
     private final By telephoneErrMsg = By.cssSelector("#input-telephone + .text-danger");
     private final By pwdErrMsg = By.cssSelector("#input-password + .text-danger");
+    private final By confirmPwdMsg = By.cssSelector("#input-confirm + .text-danger");
+    private final By warningMessage = By.cssSelector(".alert.alert-danger");
+
 
     //Action methods
     public void setFirstName(String firstName){

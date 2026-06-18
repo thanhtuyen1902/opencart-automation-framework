@@ -16,7 +16,8 @@ public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
     // msg success add to cart
-    @FindBy(xpath="//div[@class='alert alert-success alert-dismissible']") WebElement msgAddToCartSuccess;
+//    @FindBy(xpath="//div[@class='alert alert-success alert-dismissible']") WebElement msgAddToCartSuccess;
+    private final By msgAddToCartSuccess = By.cssSelector("div.alert.alert-success.alert-dismissible");
     // Product items in search results
     private final By productThumbs = By.cssSelector(".product-thumb");
 
@@ -74,9 +75,9 @@ public class BasePage {
         }
     }
 
-    protected boolean isMessageDisplayed(WebElement element, String expectedMsg) {
+    protected boolean isMessageDisplayed(By locator, String expectedMsg) {
         try {
-            String actualMsg = getErrorMessage(element);
+            String actualMsg = getErrorMessage2(locator);
             return actualMsg.contains(expectedMsg) || actualMsg.equalsIgnoreCase(expectedMsg);
         }catch (Exception e) {
             return false;

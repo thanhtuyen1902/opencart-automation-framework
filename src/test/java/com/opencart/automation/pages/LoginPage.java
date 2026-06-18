@@ -17,7 +17,8 @@ public class LoginPage extends BasePage{
     @FindBy(css = "input.btn.btn-primary") WebElement btnLogin;
 //    private By btnLogin = By.cssSelector("input.btn.btn-primary");
     //Error message
-    @FindBy(css = ".alert.alert-danger") WebElement warningMessage;
+//    @FindBy(css = ".alert.alert-danger") WebElement warningMessage;
+    private By warningMessage = By.cssSelector(".alert.alert-danger");
 
     //Method
     public void setEmailAddress(String email) {

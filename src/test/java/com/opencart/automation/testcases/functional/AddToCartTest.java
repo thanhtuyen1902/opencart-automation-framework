@@ -50,15 +50,19 @@ public class AddToCartTest extends BaseTest {
             String productName = TestDataGenerator.getRandomBasicProducts();
             hp = new HomePage(driver);
             logger.info("Step 1: Add product {} to cart from HomePage", productName);
-            hp.findProductByName(productName).clickAddToCart();
-            logger.info("Step 1.1: Click the first time: done");
-            hp.findProductByName(productName).clickAddToCart();
-            logger.info("Step 1.1: Click the second time: done");
-            logger.info("Step 2: Verify message success displayed");
             softAssert = new SoftAssert();
+            hp.findProductByName(productName).clickAddToCart();
+            logger.info("Step 2: Verify message success displayed");
             String expectedMsg = "Success: You have added " + productName + " to your shopping cart!";
             softAssert.assertTrue(hp.isSuccessAddToCartMessageDisplayed(expectedMsg),
                     "Success message should be displayed with correct content");
+            logger.info("Step 1.1: Click the first time: done");
+            hp.findProductByName(productName).clickAddToCart();
+            logger.info("Step 2: Verify message success displayed");
+            softAssert.assertTrue(hp.isSuccessAddToCartMessageDisplayed(expectedMsg),
+                    "Success message should be displayed with correct content");
+            logger.info("Step 1.1: Click the second time: done");
+
             logger.info("Step 3: Verify product {} is added to cart successfully", productName);
             Thread.sleep(100);
             logger.info("Step 3.1: Navigate to CartPage");
