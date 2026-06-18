@@ -1,10 +1,7 @@
 package com.opencart.automation.pages;
 
 import com.opencart.automation.pages.components.ProductItem;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -30,6 +27,7 @@ public class BasePage {
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
         //Khởi tạo Wait
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait.ignoring(StaleElementReferenceException.class);
 
     }
     //Các method chung có thể dùng lại ở mọi page
@@ -37,7 +35,7 @@ public class BasePage {
         waitForElementClickable(element);
         try {
             element.click();
-        } catch(Exception e) {
+        } catch(ElementNotInteractableException e) {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].click()", element);
         }
@@ -60,10 +58,20 @@ public class BasePage {
     }
 
     protected String getErrorMessage2(By locator) {
-        WebElement element = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(locator));
-
-        return element.getText().trim();
+//        WebElement element = wait.until(
+//                ExpectedConditions.visibilityOfElementLocated(locator));
+//
+//        return element.getText().trim();
+        try {
+            WebElement element = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(locator));
+            return element.getText().trim();
+        } catch (UnhandledAlertException e) {
+            System.out.println("Unexpected alert dismissed, text was: " + e.getAlertText());
+            WebElement element = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(locator));
+            return element.getText().trim();
+        }
     }
 
     protected boolean isMessageDisplayed(WebElement element, String expectedMsg) {
