@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<!--chạy song song-->
-<suite name="CrossBrowserSuite-Parallel" parallel="tests" thread-count="3">
+<!--chạy tuần tự-->
+<suite name="CrossBrowserSuite-Sequential">
     <listeners>
         <listener class-name="com.opencart.automation.utilities.ExtentReportListener" />
     </listeners>
@@ -9,11 +9,6 @@
     <test name="Chrome Test">
         <parameter name="browser" value="chrome" />
         <classes>
-<!--            <class name="com.opencart.automation.testcases.functional.LoginTest">-->
-<!--                <methods>-->
-<!--                    <include name="testLoginSuccess"/>-->
-<!--                </methods>-->
-<!--            </class>-->
             <class name="com.opencart.automation.testcases.functional.RegisterTest"/>
             <class name="com.opencart.automation.testcases.functional.LoginTest"/>
             <class name="com.opencart.automation.testcases.functional.SearchTest"/>
@@ -26,11 +21,6 @@
     <test name="Firefox Test">
         <parameter name="browser" value="firefox" />
         <classes>
-<!--            <class name="com.opencart.automation.testcases.functional.LoginTest">-->
-<!--                <methods>-->
-<!--                    <include name="testLoginSuccess"/>-->
-<!--                </methods>-->
-<!--            </class>-->
             <class name="com.opencart.automation.testcases.functional.RegisterTest"/>
             <class name="com.opencart.automation.testcases.functional.LoginTest"/>
             <class name="com.opencart.automation.testcases.functional.SearchTest"/>
@@ -43,11 +33,6 @@
     <test name="Edge Test">
         <parameter name="browser" value="edge" />
         <classes>
-<!--            <class name="com.opencart.automation.testcases.functional.LoginTest">-->
-<!--                <methods>-->
-<!--                    <include name="testLoginSuccess"/>-->
-<!--                </methods>-->
-<!--            </class>-->
             <class name="com.opencart.automation.testcases.functional.RegisterTest"/>
             <class name="com.opencart.automation.testcases.functional.LoginTest"/>
             <class name="com.opencart.automation.testcases.functional.SearchTest"/>
