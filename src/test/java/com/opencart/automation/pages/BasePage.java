@@ -54,8 +54,16 @@ public class BasePage {
             waitForElementVisible(element);
             return element.getText().trim();
         } catch (Exception e) {
-            return ""; // Không tìm thấy thông báo lỗi
+            System.err.println("Error when getting error message: " + e.getMessage());
+            return "";
         }
+    }
+
+    protected String getErrorMessage2(By locator) {
+        WebElement element = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(locator));
+
+        return element.getText().trim();
     }
 
     protected boolean isMessageDisplayed(WebElement element, String expectedMsg) {
