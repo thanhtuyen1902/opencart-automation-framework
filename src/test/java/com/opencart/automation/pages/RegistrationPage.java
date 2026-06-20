@@ -1,6 +1,7 @@
 package com.opencart.automation.pages;
 
 import com.opencart.automation.models.User;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,13 +25,21 @@ public class RegistrationPage extends BasePage{
     @FindBy(css = "input.btn.btn-primary") WebElement btnContinue;
 
     //Error message
-    @FindBy(css = "#input-firstname + .text-danger") WebElement firstNameErrMsg;
-    @FindBy(css = "#input-lastname + .text-danger") WebElement lastNameErrMsg;
-    @FindBy(css = "#input-email + .text-danger") WebElement emailErrMsg;
-    @FindBy(css = "#input-telephone + .text-danger") WebElement telephoneErrMsg;
-    @FindBy(css = "#input-password + .text-danger") WebElement pwdErrMsg;
-    @FindBy(css = "#input-confirm + .text-danger") WebElement confirmPwdMsg;
-    @FindBy(css = ".alert.alert-danger") WebElement warningMessage;
+//    @FindBy(css = "#input-firstname + .text-danger") WebElement firstNameErrMsg;
+//    @FindBy(css = "#input-lastname + .text-danger") WebElement lastNameErrMsg;
+//    @FindBy(css = "#input-email + .text-danger") WebElement emailErrMsg;
+//    @FindBy(css = "#input-telephone + .text-danger") WebElement telephoneErrMsg;
+//    @FindBy(css = "#input-password + .text-danger") WebElement pwdErrMsg;
+//    @FindBy(css = "#input-confirm + .text-danger") WebElement confirmPwdMsg;
+//    @FindBy(css = ".alert.alert-danger") WebElement warningMessage;
+
+    private final By firstNameErrMsg = By.cssSelector("#input-firstname + .text-danger");
+    private final By lastNameErrMsg = By.cssSelector("#input-lastname + .text-danger");
+    private final By emailErrMsg = By.cssSelector("#input-email + .text-danger");
+    private final By telephoneErrMsg = By.cssSelector("#input-telephone + .text-danger");
+    private final By pwdErrMsg = By.cssSelector("#input-password + .text-danger");
+    private final By confirmPwdMsg = By.cssSelector("#input-confirm + .text-danger");
+    private final By warningMessage = By.cssSelector(".alert.alert-danger");
 
 
     //Action methods
@@ -141,15 +150,15 @@ public class RegistrationPage extends BasePage{
     public String getFieldError(String fieldName) {
         switch(fieldName.toLowerCase()) {
             case "firstname":
-                return getErrorMessage(firstNameErrMsg);
+                return getErrorMessage2(firstNameErrMsg);
             case "lastname":
-                return getErrorMessage(lastNameErrMsg);
+                return getErrorMessage2(lastNameErrMsg);
             case "email":
-                return getErrorMessage(emailErrMsg);
+                return getErrorMessage2(emailErrMsg);
             case "telephone":
-                return getErrorMessage(telephoneErrMsg);
+                return getErrorMessage2(telephoneErrMsg);
             case "password":
-                return getErrorMessage(pwdErrMsg);
+                return getErrorMessage2(pwdErrMsg);
             default:
                 throw new IllegalArgumentException("Invalid field name: " + fieldName);
         }

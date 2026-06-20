@@ -1,10 +1,7 @@
 package com.opencart.automation.pages;
 
 import com.opencart.automation.pages.components.ProductItem;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -19,7 +16,8 @@ public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
     // msg success add to cart
-    @FindBy(xpath="//div[@class='alert alert-success alert-dismissible']") WebElement msgAddToCartSuccess;
+//    @FindBy(xpath="//div[@class='alert alert-success alert-dismissible']") WebElement msgAddToCartSuccess;
+    private final By msgAddToCartSuccess = By.cssSelector("div.alert.alert-success.alert-dismissible");
     // Product items in search results
     private final By productThumbs = By.cssSelector(".product-thumb");
 
@@ -30,6 +28,7 @@ public class BasePage {
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
         //Khởi tạo Wait
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait.ignoring(StaleElementReferenceException.class);
 
     }
     //Các method chung có thể dùng lại ở mọi page
@@ -37,7 +36,7 @@ public class BasePage {
         waitForElementClickable(element);
         try {
             element.click();
-        } catch(Exception e) {
+        } catch(ElementNotInteractableException e) {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].click()", element);
         }
@@ -54,13 +53,31 @@ public class BasePage {
             waitForElementVisible(element);
             return element.getText().trim();
         } catch (Exception e) {
-            return ""; // Không tìm thấy thông báo lỗi
+            System.err.println("Error when getting error message: " + e.getMessage());
+            return "";
         }
     }
 
-    protected boolean isMessageDisplayed(WebElement element, String expectedMsg) {
+    protected String getErrorMessage2(By locator) {
+//        WebElement element = wait.until(
+//                ExpectedConditions.visibilityOfElementLocated(locator));
+//
+//        return element.getText().trim();
         try {
-            String actualMsg = getErrorMessage(element);
+            WebElement element = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(locator));
+            return element.getText().trim();
+        } catch (UnhandledAlertException e) {
+            System.out.println("Unexpected alert dismissed, text was: " + e.getAlertText());
+            WebElement element = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(locator));
+            return element.getText().trim();
+        }
+    }
+
+    protected boolean isMessageDisplayed(By locator, String expectedMsg) {
+        try {
+            String actualMsg = getErrorMessage2(locator);
             return actualMsg.contains(expectedMsg) || actualMsg.equalsIgnoreCase(expectedMsg);
         }catch (Exception e) {
             return false;

@@ -101,11 +101,10 @@
       </dependency>
 <!--      WebDriverManager (auto driver)-->
       <!-- Source: https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
-      <!-- Source: https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
       <dependency>
           <groupId>io.github.bonigarcia</groupId>
           <artifactId>webdrivermanager</artifactId>
-          <version>6.1.0</version>
+          <version>6.3.3</version>
           <scope>compile</scope>
       </dependency>
 

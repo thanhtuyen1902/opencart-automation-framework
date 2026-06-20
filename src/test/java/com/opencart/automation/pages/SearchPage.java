@@ -1,5 +1,6 @@
 package com.opencart.automation.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,8 +17,8 @@ public class SearchPage extends BasePage{
     @FindBy(css="div[id='product-search'] li:nth-child(1)") WebElement searchBar;
     @FindBy(css = ".product-thumb .caption h4 a") List<WebElement> productTitles;
     // Case no results found
-    @FindBy(xpath="//p[contains(text(),'There is no product that matches the search criteria.')]") WebElement noResultsMsg;
-
+//    @FindBy(xpath="//p[contains(text(),'There is no product that matches the search criteria.')]") WebElement noResultsMsg;
+    private final By noResultsMsg = By.xpath("//p[contains(text(),'There is no product that matches the search criteria.')]");
     //Method
     public String getHeaderSearchResults() {
         return headerSearchResults.getText();

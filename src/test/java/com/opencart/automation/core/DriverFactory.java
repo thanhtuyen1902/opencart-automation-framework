@@ -131,18 +131,21 @@ public class DriverFactory {
     private static ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
         // Thêm các tùy chọn nếu cần, ví dụ:
+        chromeOptions.setAcceptInsecureCerts(true);
 //        chromeOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return chromeOptions;
     }
     private static FirefoxOptions getFirefoxOptions() {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         // Thêm các tùy chọn nếu cần, ví dụ:
+        firefoxOptions.setAcceptInsecureCerts(true);
 //        firefoxOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return firefoxOptions;
     }
     private static EdgeOptions getEdgeOptions() {
         EdgeOptions edgeOptions = new EdgeOptions();
         // Thêm các tùy chọn nếu cần, ví dụ:
+        edgeOptions.setAcceptInsecureCerts(true);
 //        edgeOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return edgeOptions;
     }

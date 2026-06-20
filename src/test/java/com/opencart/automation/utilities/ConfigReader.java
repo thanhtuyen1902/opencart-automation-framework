@@ -47,7 +47,11 @@ public class ConfigReader {
 
     //Hạ tầng chạy test (local/remote)
     public static String getExecutionMode() {
-        return getProperty("execution_env").toLowerCase().trim();
+//        return getProperty("execution_env").toLowerCase().trim();
+        //ưu tiên lấy giá trị từ cmdline nếu có, nếu không có thì lấy từ config.properties
+        return System.getProperty(
+                        "execution_env",
+                        getProperty("execution_env")).toLowerCase().trim();
     }
 
     public static String getGridURL() {

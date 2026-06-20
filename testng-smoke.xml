@@ -35,7 +35,7 @@
                     <include name="testAddToCartFromProductPage"/>
                 </methods>
             </class>
-
+            <class name="com.opencart.automation.testcases.e2e.E2ELoginFlowTest"/>
         </classes>
 
     </test>

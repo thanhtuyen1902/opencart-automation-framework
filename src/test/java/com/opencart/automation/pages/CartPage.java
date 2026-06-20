@@ -31,6 +31,7 @@ public class CartPage extends BasePage{
     }
 
     public CartItem getCartItemByProductName(String productName) {
+        wait.until(driver -> isProductInCart(productName));
         return getCartItems()
                 .stream()
                 .filter(item -> item.getProductName().equalsIgnoreCase(productName))
