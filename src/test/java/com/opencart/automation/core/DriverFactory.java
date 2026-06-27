@@ -25,7 +25,6 @@ public class DriverFactory {
     //dùng để hỗ trợ parallel testing, selfhealing
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static final Logger logger = LogManager.getLogger(DriverFactory.class);
-//    private static final ThreadLocal<SelfHealingDriver> driver = new ThreadLocal<>();
 
     /**
      * Khởi tạo driver theo browser và mode (local/remote)
@@ -130,14 +129,14 @@ public class DriverFactory {
 
     private static ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
-        // Thêm các tùy chọn nếu cần, ví dụ:
+        // Thêm các tùy chọn
         chromeOptions.setAcceptInsecureCerts(true);
 //        chromeOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return chromeOptions;
     }
     private static FirefoxOptions getFirefoxOptions() {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
-        // Thêm các tùy chọn nếu cần, ví dụ:
+        // Thêm các tùy chọn
         firefoxOptions.setAcceptInsecureCerts(true);
 //        firefoxOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return firefoxOptions;

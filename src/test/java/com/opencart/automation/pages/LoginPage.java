@@ -2,22 +2,17 @@ package com.opencart.automation.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage{
     public LoginPage(WebDriver driver) {
         super(driver);
     }
     //Locators
-    @FindBy(xpath="//input[@id='input-email']") WebElement txtEmail;
-    @FindBy(xpath="//input[@id='input-password']") WebElement txtPassword;
-    @FindBy(xpath="//div[@class='form-group']//a[normalize-space()='Forgotten Password']") WebElement lnkForgotPwd;
-//    @FindBy(xpath="//input[@value='Login']") WebElement btnLogin;
-    @FindBy(css = "input.btn.btn-primary") WebElement btnLogin;
-//    private By btnLogin = By.cssSelector("input.btn.btn-primary");
+    private final By txtEmail = By.xpath("//input[@id='input-email']");
+    private final By txtPassword = By.xpath("//input[@id='input-password']");
+    private final By lnkForgotPwd = By.xpath("//div[@class='form-group']//a[normalize-space()='Forgotten Password']");
+    private final By btnLogin = By.cssSelector("input.btn.btn-primary");
     //Error message
-//    @FindBy(css = ".alert.alert-danger") WebElement warningMessage;
     private By warningMessage = By.cssSelector(".alert.alert-danger");
 
     //Method
@@ -29,13 +24,9 @@ public class LoginPage extends BasePage{
     }
     public void clickLogin() {
         click(btnLogin);
-//        click(driver.findElement(btnLogin));
     }
 
     public boolean isLoginFailedMessageDisplayed(String expectedMsg) {
-        return isMessageDisplayed(warningMessage, expectedMsg);
-    }
-    public boolean isExceedLoginAttemptsMessageDisplayed(String expectedMsg) {
         return isMessageDisplayed(warningMessage, expectedMsg);
     }
 

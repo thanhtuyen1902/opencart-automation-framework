@@ -1,7 +1,6 @@
 package com.opencart.automation.utilities;
 
 import org.testng.annotations.DataProvider;
-
 import java.io.IOException;
 
 public class DataProviders {

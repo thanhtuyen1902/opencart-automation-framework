@@ -1,7 +1,6 @@
 package com.opencart.automation.pages;
 
 import com.opencart.automation.pages.components.CartItem;
-import com.opencart.automation.pages.components.ProductItem;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

@@ -1,8 +1,7 @@
 package com.opencart.automation.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 //p/án: Sau này có thể tách thành HeaderComponent
 public class HomePage extends BasePage{
     public HomePage(WebDriver driver){
@@ -10,15 +9,15 @@ public class HomePage extends BasePage{
     }
 
     //Locators
-    @FindBy(xpath="//span[@class='caret']") WebElement ddlMyAccount;
-    //====My Account Dropdown
-    @FindBy(xpath="//a[normalize-space()='Register']") WebElement lnkRegisterPage;
-    @FindBy(xpath="//a[normalize-space()='Login']") WebElement lnkLoginPage;
-    @FindBy(xpath="//a[normalize-space()='Logout']") WebElement lnkLogout;
-    @FindBy(css="a[title='Shopping Cart']") WebElement lnkCartPage;
-    //Search elements
-    @FindBy(xpath="//input[@placeholder='Search']") WebElement txtSearch;
-    @FindBy(xpath="//button[@class='btn btn-default btn-lg']") WebElement btnSearch;
+    private final By ddlMyAccount = By.xpath("//span[@class='caret']");
+    // ==== My Account Dropdown
+    private final By lnkRegisterPage = By.xpath("//a[normalize-space()='Register']");
+    private final By lnkLoginPage = By.xpath("//a[normalize-space()='Login']");
+    private final By lnkLogout = By.xpath("//a[normalize-space()='Logout']");
+    private final By lnkCartPage = By.cssSelector("a[title='Shopping Cart']");
+    // Search elements
+    private final By txtSearch = By.xpath("//input[@placeholder='Search']");
+    private final By btnSearch = By.xpath("//button[@class='btn btn-default btn-lg']");
 
     //Method
     public void clickMyAccount() {

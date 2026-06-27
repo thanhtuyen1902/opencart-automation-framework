@@ -12,14 +12,6 @@ public class TestDataGenerator {
     public static String generateRandomEmail() {
         return "testuser" + System.currentTimeMillis() + "@gmail.com";
     }
-//
-//    public static String generatePhoneNumber() {
-//        return "09" + String.format("%08d", random.nextInt(100000000));
-//    }
-//
-//    public static String generateRandomPassword() {
-//        return "Aa123456";   //mặc định
-//    }
 
     // Generate user for regisration with default password
     public static User generateUserWithDefaultPwd() {
@@ -77,9 +69,7 @@ public class TestDataGenerator {
     };
     private static final String[] BASIC_PRODUCTS = {
             "MacBook",
-            "iPhone",
-//            "Apple Cinema 30\"",
-//            "Canon EOS 5D"
+            "iPhone"
     };
     // Get random data
     public static String getRandomExactKeyword() {

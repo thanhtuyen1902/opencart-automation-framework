@@ -33,7 +33,6 @@
                 <methods>
                     <include name="testSearchExactKeyword"/>
                     <include name="testSearchNoMatchingProduct"/>
-<!--                    cần xem lại case này-->
                     <include name="testSearchCaseInsensitive"/>
                 </methods>
             </class>
@@ -47,7 +46,6 @@
             </class>
 
 <!--            E2E Test-->
-<!--            chưa ổn định lắm-->
             <class name="com.opencart.automation.testcases.e2e.E2ERegisterFlowTest"/>
             <class name="com.opencart.automation.testcases.e2e.E2ELoginFlowTest"/>
 

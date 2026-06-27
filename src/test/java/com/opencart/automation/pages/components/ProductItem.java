@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,7 +33,6 @@ public class ProductItem {
 
     // Click product to navigate to product details page
     public void clickProduct() {
-//        productElement.findElement(productName).click();
         WebElement btnProduct = wait.until(ExpectedConditions.elementToBeClickable(productElement.findElement(productName)));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click()", btnProduct);

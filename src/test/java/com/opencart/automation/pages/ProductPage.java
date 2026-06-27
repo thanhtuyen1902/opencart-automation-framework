@@ -1,23 +1,26 @@
 package com.opencart.automation.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ProductPage extends BasePage{
     public ProductPage(WebDriver driver) {
         super(driver);
     }
     //Locators
-    @FindBy(xpath="//button[@id='button-cart']") WebElement addToCartBtn;
-    @FindBy(xpath="//input[@id='input-quantity']") WebElement txtQuantity;
-    @FindBy(css = ".breadcrumb li:last-child a") WebElement breadcrumbProductName;
+    private final By addToCartBtn = By.id("button-cart");
+    private final By txtQuantity = By.id("input-quantity");
+    private final By breadcrumbProductName = By.cssSelector(".breadcrumb li:last-child a");
     //Method
     public void clickAddToCart() {
         click(addToCartBtn);
     }
     public String getBreadcrumbProductName() {
-        return breadcrumbProductName.getText();
+        return wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(breadcrumbProductName))
+                .getText()
+                .trim();
     }
     public void setQuantity(int quantity) {
         sendKeys(txtQuantity, String.valueOf(quantity));

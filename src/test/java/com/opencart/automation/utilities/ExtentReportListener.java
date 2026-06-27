@@ -16,8 +16,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+
 
 public class ExtentReportListener implements ITestListener {
     private ExtentSparkReporter sparkReporter;
@@ -27,10 +26,8 @@ public class ExtentReportListener implements ITestListener {
     private ThreadLocal<ExtentTest> testLogger = new ThreadLocal<>();
     private String reportName;
     private static boolean systemInfoAdded = false;
-//    private long suiteStartTime;
     //Activate when start running suite
     public void onStart(ITestContext context) {
-//        suiteStartTime = System.currentTimeMillis();
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         reportName = "TestReport_" + timeStamp + ".html";
         sparkReporter = new ExtentSparkReporter(".\\reports\\" + reportName);
@@ -114,7 +111,6 @@ public class ExtentReportListener implements ITestListener {
     //Activate when finish suite
     //ITestContext context
     public void onFinish(ITestContext context) {
-//        long suiteEndTime = System.currentTimeMillis();
         long suiteStartTime = context.getStartDate().getTime();
         long suiteEndTime = context.getEndDate().getTime();
         double totalSuiteDuration = (suiteEndTime - suiteStartTime)/1000.0;

@@ -126,9 +126,3 @@ public class AddToCartTest extends BaseTest {
 
     }
 }
-//    @BeforeMethod
-//    public void setUpTest() {
-//        logger.info("***** Starting AddToCartTest *****");
-//        cp = new CartPage(driver);
-//        cp.removeAllProductsFromCart();
-//    }

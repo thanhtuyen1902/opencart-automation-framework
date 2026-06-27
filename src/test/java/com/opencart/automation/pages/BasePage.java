@@ -2,9 +2,6 @@ package com.opencart.automation.pages;
 
 import com.opencart.automation.pages.components.ProductItem;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,24 +13,21 @@ public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
     // msg success add to cart
-//    @FindBy(xpath="//div[@class='alert alert-success alert-dismissible']") WebElement msgAddToCartSuccess;
     private final By msgAddToCartSuccess = By.cssSelector("div.alert.alert-success.alert-dismissible");
     // Product items in search results
     private final By productThumbs = By.cssSelector(".product-thumb");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        //tự động khởi tạo WebElement được đánh dấu @FindBy trong class hiện tại
-//        PageFactory.initElements(driver, this);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
         //Khởi tạo Wait
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         this.wait.ignoring(StaleElementReferenceException.class);
 
     }
     //Các method chung có thể dùng lại ở mọi page
-    protected void click(WebElement element) {
-        waitForElementClickable(element);
+    protected void click(By locator) {
+        WebElement element = wait.until(
+                ExpectedConditions.elementToBeClickable(locator));
         try {
             element.click();
         } catch(ElementNotInteractableException e) {
@@ -43,11 +37,13 @@ public class BasePage {
 
     }
 
-    protected void sendKeys(WebElement element, String text) {
-        waitForElementVisible(element);
-        element.clear();
-        element.sendKeys(text);
+        protected void sendKeys(By locator, String text) {
+            WebElement element = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(locator));
+            element.clear();
+            element.sendKeys(text);
     }
+
     protected String getErrorMessage(WebElement element) {
         try {
             waitForElementVisible(element);
@@ -59,10 +55,6 @@ public class BasePage {
     }
 
     protected String getErrorMessage2(By locator) {
-//        WebElement element = wait.until(
-//                ExpectedConditions.visibilityOfElementLocated(locator));
-//
-//        return element.getText().trim();
         try {
             WebElement element = wait.until(
                     ExpectedConditions.visibilityOfElementLocated(locator));
@@ -83,7 +75,21 @@ public class BasePage {
             return false;
         }
     }
-
+    protected String getText(By locator) {
+        return wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(locator))
+                .getText()
+                .trim();
+    }
+    protected boolean isDisplayed(By locator) {
+        try {
+            return wait.until(
+                            ExpectedConditions.visibilityOfElementLocated(locator))
+                    .isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
     //Các method chung sử dụng wait
     protected void waitForElementVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));

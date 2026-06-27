@@ -3,8 +3,6 @@ package com.opencart.automation.pages;
 import com.opencart.automation.models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class RegistrationPage extends BasePage{
     public RegistrationPage(WebDriver driver) {
@@ -12,27 +10,18 @@ public class RegistrationPage extends BasePage{
     }
 
     // locator elements
-    @FindBy(xpath="//input[@id='input-firstname']") WebElement txtFirstName;
-    @FindBy(xpath="//input[@id='input-lastname']") WebElement txtLastName;
-    @FindBy(xpath="//input[@id='input-email']") WebElement txtEmail;
-    @FindBy(xpath="//input[@id='input-telephone']") WebElement txtTelephone;
-    @FindBy(xpath="//input[@id='input-password']") WebElement txtPassword;
-    @FindBy(xpath="//input[@id='input-confirm']") WebElement txtConfirmPassword;
-    @FindBy(xpath="//input[@value='0']") WebElement rdoNewsletterNo;
-    @FindBy(xpath="//label[normalize-space()='Yes']") WebElement rdoNewsletterYes;
-    @FindBy(xpath="//input[@name='agree']") WebElement chkAgreePolicy;
-    @FindBy(xpath="//b[normalize-space()='Privacy Policy']") WebElement lnkPrivacyPolicy;
-    @FindBy(css = "input.btn.btn-primary") WebElement btnContinue;
-
+    private final By txtFirstName = By.id("input-firstname");
+    private final By txtLastName = By.id("input-lastname");
+    private final By txtEmail = By.id("input-email");
+    private final By txtTelephone = By.id("input-telephone");
+    private final By txtPassword = By.id("input-password");
+    private final By txtConfirmPassword = By.id("input-confirm");
+    private final By rdoNewsletterNo = By.cssSelector("input[name='newsletter'][value='0']");
+    private final By rdoNewsletterYes = By.cssSelector("input[name='newsletter'][value='1']");
+    private final By chkAgreePolicy = By.name("agree");
+    private final By lnkPrivacyPolicy = By.linkText("Privacy Policy");
+    private final By btnContinue = By.cssSelector("input.btn.btn-primary");
     //Error message
-//    @FindBy(css = "#input-firstname + .text-danger") WebElement firstNameErrMsg;
-//    @FindBy(css = "#input-lastname + .text-danger") WebElement lastNameErrMsg;
-//    @FindBy(css = "#input-email + .text-danger") WebElement emailErrMsg;
-//    @FindBy(css = "#input-telephone + .text-danger") WebElement telephoneErrMsg;
-//    @FindBy(css = "#input-password + .text-danger") WebElement pwdErrMsg;
-//    @FindBy(css = "#input-confirm + .text-danger") WebElement confirmPwdMsg;
-//    @FindBy(css = ".alert.alert-danger") WebElement warningMessage;
-
     private final By firstNameErrMsg = By.cssSelector("#input-firstname + .text-danger");
     private final By lastNameErrMsg = By.cssSelector("#input-lastname + .text-danger");
     private final By emailErrMsg = By.cssSelector("#input-email + .text-danger");
@@ -129,9 +118,6 @@ public class RegistrationPage extends BasePage{
     }
 
     //Verification method
-//    public boolean isRegistrationPageStillDisplayed() {
-//        return isElementDisplayed(txtFirstName);
-//    }
 
 
     //Validation method

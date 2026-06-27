@@ -20,7 +20,7 @@ import java.util.Date;
 public class BaseTest {
     protected WebDriver driver;
     public Logger logger;
-    //sửa thành beforemethod
+
     @BeforeMethod
     @Parameters("browser")
     public void setUp(@Optional String browser) {
@@ -52,7 +52,6 @@ public class BaseTest {
     //Capture screen when test failed
     public static String captureScreenshot(String testName) {
         //lấy driver gốc
-//        WebDriver originalDriver = ((com.epam.healenium.SelfHealingDriver)DriverFactory.getDriver()).getDelegate();
         WebDriver originalDriver = DriverFactory.getDriver();
         if (originalDriver instanceof com.epam.healenium.SelfHealingDriver) {
             originalDriver = ((com.epam.healenium.SelfHealingDriver)originalDriver).getDelegate();

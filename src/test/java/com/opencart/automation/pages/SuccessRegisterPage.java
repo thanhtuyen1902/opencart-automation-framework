@@ -1,26 +1,23 @@
 package com.opencart.automation.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 public class SuccessRegisterPage extends BasePage{
     public SuccessRegisterPage(WebDriver driver) {
         super(driver);
     }
-    @FindBy(xpath="//h1[normalize-space()='Your Account Has Been Created!']") WebElement lblSuccessTitle;
-    @FindBy(xpath="//a[normalize-space()='Continue']") WebElement btnContinue;
-    @FindBy(xpath="//a[normalize-space()='Success']") WebElement breadcrumbSuccess;
-
+    private final By lblSuccessTitle = By.xpath("//h1[normalize-space()='Your Account Has Been Created!']");
+    private final By btnContinue = By.linkText("Continue");
+    private final By breadcrumbSuccess = By.linkText("Success");
 
     public boolean isSuccessPageDisplayed() {
-        return breadcrumbSuccess.isDisplayed();
+        return isDisplayed(breadcrumbSuccess);
     }
 
     public String getSuccessTitle() {
-        waitForElementVisible(lblSuccessTitle);
-        return lblSuccessTitle.getText().trim();
+        return getText(lblSuccessTitle);
     }
     public void clickContinue() {
         click(btnContinue);
