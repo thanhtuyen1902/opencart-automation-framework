@@ -10,9 +10,9 @@
     <test name="Test Demo">
         <classes>
             <!--            Login func-->
-            <class name="com.opencart.automation.testcases.functional.AddToCartTest">
+            <class name="com.opencart.automation.testcases.functional.LoginTest">
                 <methods>
-                    <include name="testAddToCartDuplicate"/>
+                    <include name="testLoginSuccess"/>
                 </methods>
             </class>
 <!--            <class name="com.opencart.automation.testcases.functional.AddToCartTest">-->

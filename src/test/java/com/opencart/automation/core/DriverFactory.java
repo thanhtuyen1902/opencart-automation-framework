@@ -130,19 +130,19 @@ public class DriverFactory {
     private static ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setAcceptInsecureCerts(true);
-//        chromeOptions.addArguments("--headless"); // Chạy ở chế độ headless
+        chromeOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return chromeOptions;
     }
     private static FirefoxOptions getFirefoxOptions() {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setAcceptInsecureCerts(true);
-//        firefoxOptions.addArguments("--headless"); // Chạy ở chế độ headless
+        firefoxOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return firefoxOptions;
     }
     private static EdgeOptions getEdgeOptions() {
         EdgeOptions edgeOptions = new EdgeOptions();
         edgeOptions.setAcceptInsecureCerts(true);
-//        edgeOptions.addArguments("--headless"); // Chạy ở chế độ headless
+        edgeOptions.addArguments("--headless"); // Chạy ở chế độ headless
         return edgeOptions;
     }
 }
