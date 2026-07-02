@@ -127,6 +127,8 @@ public class DriverFactory {
         }
     }
 
+
+    
     private static ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setAcceptInsecureCerts(true);
