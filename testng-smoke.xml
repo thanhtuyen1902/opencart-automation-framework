@@ -8,8 +8,6 @@
     </listeners>
 
     <test name="Test Smoke">
-
-        
         <classes>
             <!--                Register func-->
             <class name="com.opencart.automation.testcases.functional.RegisterTest">
