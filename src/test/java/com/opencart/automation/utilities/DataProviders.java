@@ -17,16 +17,16 @@ public class DataProviders {
     }
 
     //DataProvider 2
-    @DataProvider(name="LoginData")
-    public static Object[][] getLoginData() {
-        String path = "src/test/resources/testData/login_testdata.xlsx";
-        String sheetName = "LoginData";
-        try {
-            return ExcelUtils.getExcelData(path, sheetName);
-        } catch (IOException e) {
-            throw new RuntimeException("Lỗi đọc file", e);
-        }
-    }
+//    @DataProvider(name="LoginData")
+//    public static Object[][] getLoginData() {
+//        String path = "src/test/resources/testData/login_testdata.xlsx";
+//        String sheetName = "LoginData";
+//        try {
+//            return ExcelUtils.getExcelData(path, sheetName);
+//        } catch (IOException e) {
+//            throw new RuntimeException("Lỗi đọc file", e);
+//        }
+//    }
     //DataProvider 3
 
 }
