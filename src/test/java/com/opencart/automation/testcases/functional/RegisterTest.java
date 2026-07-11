@@ -106,28 +106,28 @@ public class RegisterTest extends BaseTest {
 
     }
 
-@Test(description = "RG_03 - Đăng ký thất bại khi chưa tích chọn Privacy Policy")
-public void testRegisterNoPrivacyPolicy() {
-    logger.info("***** Starting RG_03 - Đăng ký thất bại khi chưa tích chọn Privacy Policy ******");
-    try {
-        User user = TestDataGenerator.generateUserWithDefaultPwd();
-        logger.info("Step 1: Fill registration form without accepting privacy policy");
-        rp.fillRegisterForm(user);
-        logger.info("Step 2: Click Continue");
-        rp.clickContinue();
-        logger.info("Step 3: Verify privacy policy error message");
-        softAssert.assertTrue(rp.isPolicyErrorMsgDisplayed("Warning: You must agree to the Privacy Policy!"),
-                "Privacy policy error message should be displayed");
+    @Test(description = "RG_03 - Đăng ký thất bại khi chưa tích chọn Privacy Policy")
+    public void testRegisterNoPrivacyPolicy() {
+        logger.info("***** Starting RG_03 - Đăng ký thất bại khi chưa tích chọn Privacy Policy ******");
+        try {
+            User user = TestDataGenerator.generateUserWithDefaultPwd();
+            logger.info("Step 1: Fill registration form without accepting privacy policy");
+            rp.fillRegisterForm(user);
+            logger.info("Step 2: Click Continue");
+            rp.clickContinue();
+            logger.info("Step 3: Verify privacy policy error message");
+            softAssert.assertTrue(rp.isPolicyErrorMsgDisplayed("Warning: You must agree to the Privacy Policy!"),
+                    "Privacy policy error message should be displayed");
 
-        softAssert.assertAll();
-        logger.info("Registered user: {}", user);
-        logger.info("TEST PASSED");
-    }catch (Exception e) {
-        logger.error("TEST FAILED: ", e);
-        Assert.fail("Test failed with exception: " + e.getMessage());
+            softAssert.assertAll();
+            logger.info("Registered user: {}", user);
+            logger.info("TEST PASSED");
+        }catch (Exception e) {
+            logger.error("TEST FAILED: ", e);
+            Assert.fail("Test failed with exception: " + e.getMessage());
+        }
+        logger.info("***** Finished RG_03 - Đăng ký thất bại khi chưa tích chọn Privacy Policy ******");
     }
-    logger.info("***** Finished RG_03 - Đăng ký thất bại khi chưa tích chọn Privacy Policy ******");
-}
 
     @Test(description = "RG_04 - Đăng ký thất bại khi Email đã được sử dụng")
     public void testRegisterDuplicateEmail() {
